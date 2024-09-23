@@ -115,6 +115,11 @@ public class FitsServlet extends HttpServlet {
 				    logger.info("File validation failed");
 				    if (projectProperties.canRead() != true) {
 				        logger.info("File cannot be read.");
+				        try {
+				            InputStream is = new FileInputStream(projectProperties);
+				        } catch (Exception e) {
+				            logger.info("Exception!", e);
+				        }
 				    }
 				}
 			} catch (IOException e) {
