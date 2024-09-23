@@ -113,7 +113,7 @@ public class FitsServlet extends HttpServlet {
 					applicationProps.load(is);
 				} else {
 				    logger.info("File validation failed");
-				    if projectProperties.canRead() != true {
+				    if (projectProperties.canRead() != true) {
 				        logger.info("File cannot be read.");
 				    }
 				}
