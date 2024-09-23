@@ -105,19 +105,20 @@ public class FitsServlet extends HttpServlet {
 		logger.info("Value of environment property: ["+ ENV_PROJECT_PROPS + "] for finding external properties file in location: [" + environmentProjectPropsFile + "]");
 		if (environmentProjectPropsFile != null) {
 			logger.info("Will look for properties file from environment in location: [" + environmentProjectPropsFile + "]");
-// 			try {
+			try {
 				File projectProperties = new File(environmentProjectPropsFile);
-// 				if (projectProperties.exists() && projectProperties.isFile() && projectProperties.canRead()) {
+				if (projectProperties.exists() && projectProperties.isFile() && projectProperties.canRead()) {
 					InputStream is = new FileInputStream(projectProperties);
 					applicationProps = new Properties();
 					applicationProps.load(is);
-// 				}
-// 			} catch (IOException e) {
+				}
+			} catch (IOException e) {
 				// fall back to default file
-// 				logger.error("Unable to load properties file: [" + environmentProjectPropsFile + "] -- reason: " + e.getMessage(), e);
-// 				logger.error("Falling back to default project.properties file: [" + PROPERTIES_FILE_NAME + "]");
-// 				applicationProps = null;
-// 			}
+				logger.info("Unable to load props file", e);
+				logger.error("Unable to load properties file: [" + environmentProjectPropsFile + "] -- reason: " + e.getMessage(), e);
+				logger.error("Falling back to default project.properties file: [" + PROPERTIES_FILE_NAME + "]");
+				applicationProps = null;
+			}
 		}
 
 		if (applicationProps == null) { // did not load from environment variable location
